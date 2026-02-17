@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Deploying to S3...
+      - aws s3 sync . s3://arn:aws:s3:::my-first-construction-site --delete
+
+      - echo Invalidating CloudFront...
+      - aws cloudfront create-invalidation --distribution-id arn:aws:cloudfront::728528178219:distribution/E1HEN8BCV04TR4 --paths "/*"
